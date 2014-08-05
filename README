@@ -1,0 +1,38 @@
+Video Plug-in Requirements
+
+WordPress 2.9 or newer
+PHP 5.3 or newer on your hosting server, with the cURL Library and DOMXML Library Installed.
+Fopen() must be enabled for the blog directory.
+MYSQL 5.0 database or newer
+Please include (in the <head> tag) the libraries listed here: https://github.com/videojs/video.js/blob/master/docs/setup.md (either locally or linked to the CDN version)
+The Wordpress SEO by Yoast Plugin is highly recommended and our importer integrates with it to auto populate meta title and description tags.
+
+[Jump to top]
+
+Installation
+
+
+To install this plug-in, log into your WordPress administration panel (generally /wp-admin) and click on the Add New link.
+
+Then, click on the Upload link and select the .zip file you downloaded. This should automatically upload and install the plug-in. You may need to activate it manually by visiting the master plug-in page and clicking �Activate� under �Brafton API Article Loader�.
+
+[Jump to top]
+
+Configuration
+
+The Video importer is configured differently than our regular importer.
+
+Brafton Video Integration
+If you're not receiving Video Content from Brafton then please go here and download our regular plugin: https://github.com/ContentLEAD/ContentLead-WP-Plugin/
+
+After installing the plugin as above:
+  
+1.Obtain your public and private keys (these can be acquired from your account manager or by emailing techsupport at brafton dot com) 
+2.Go to the plugin options page -> Settings->Brafton Article Importer
+3.Select Display advanced options.
+4.Select "Just Video" or "Both" depending on whether you receive regular in addition to our Video articles.
+5.Enter your public and private key, and put "0" in the feed number field.
+6.Select whether you want your posts to come in Published or in Draft mode.
+7.Enable the Article Importer.
+
+Please refer any questions or issues you may have with this process by emailing techsupport at brafton dot com.

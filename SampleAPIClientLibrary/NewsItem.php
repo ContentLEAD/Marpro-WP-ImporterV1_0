@@ -23,7 +23,7 @@ define("CREATED_DATE", "createdDate");
 define("LAST_MODIFIED_DATE", "lastModifiedDate");
 define("EXTRACT", "extract");
 define("TEXT", "text");
-define("BY_LINE", "byline");
+define("BY_LINE", "byLine");
 define("TWEET_TEXT", "tweetText");
 define("SOURCE", "source");
 define("STATE", "state");
@@ -105,21 +105,10 @@ class NewsItem	{
 	/** @return XMLHandler **/
 	private function getFullNewsXML(){
 		if(empty($this->xh)){
-			if(strcasecmp($this->getFormat(), "html")){
-				$this->xh = new XMLHandler($this->href);
-				//echo "1.XMLHREAF :";
-				//echo $this->href;
-				
-			}
-			else {
-				$this->xh = new XMLHandler($this->href . $this->getFormat());
-				//echo "2.XMLHREAF :";
-				//echo $this->href . $this->getFormat();
-			}
+			if(strcasecmp($this->getFormat(), "html"))$this->xh = new XMLHandler($this->href);
+			else $this->xh = new XMLHandler($this->href . $this->getFormat());
 		}
-		
 		return $this->xh;
-
 	}
 
 	/**
@@ -282,14 +271,8 @@ class NewsItem	{
 		if(empty($this->text)){
 			$xh = $this->getFullNewsXML();
 			$this->text = $xh->getValue(TEXT);
-
 			//if(empty($this->text))throw new XMLNodeException("Element " . TEXT . " for " . NEWS_LIST_ITEM . " with id: " . $this->id . "<br />\n");
 		}
-
-		echo "xh VALUE: ";
-		//echo $xh;
-		echo "</br>";
-
 		return $this->text;
 	}
 

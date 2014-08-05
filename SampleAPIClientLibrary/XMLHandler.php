@@ -56,7 +56,6 @@ class XMLHandler {
 		$result = $this->doc->getElementsByTagName($element);
 		if($result->length != null) return $this->doc->getElementsByTagName($element)->item(0)->nodeValue;
 		else return null;
-		echo "YES YOU CAN";
 	}
 
 	/**
