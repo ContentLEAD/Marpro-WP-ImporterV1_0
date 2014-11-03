@@ -973,85 +973,39 @@ function braftonxml_sched_load_videos()
 				
 		$videoList=$videoOutClient->ListForArticle($brafton_id,0,10);
 		$list=$videoList->items;
-		$ogg=false;
-		$mp4=false;
-		$flv=false;
-		$HDogg=false;
-		$HDmp4=false;
-		$HDflv=false;		
+		$player = get_option("brafton_video_embed");
+		if ($player == "atlantis")
+			$embedCode = sprintf( "<video id='video-%s' class=\"ajs-default-skin atlantis-js\" controls preload=\"auto\" width='512' height='288'; poster='%s' >", $brafton_id, $presplash ); 
+		
+		else
+			$embedCode = sprintf( "<video id='video-%s' class='video-js vjs-default-skin' controls preload='auto' width='512' height='288'; poster='%s' data-setup src='%s' >", $brafton_id, $presplash, $path ); 
 
 		foreach($list as $listItem){
 			$output=$videoOutClient->Get($listItem->id);
 			//logMsg($output->path);
 			$type = $output->type;
-			switch($type){
-				case "htmlmp4": 
-					$mp4=$output->path; 
-					$width=$output->width; 
-					$height=$output->height;
-					break;
+			$path = $output->path; 
+			$height = $output->path; 
 
-				case "htmlogg": 
-					$ogg=$output->path; 
-					$width=$output->width; 
-					$height=$output->height;
-					break;
+			$resolution = $output->height; 
+			$width = $resolution; 
 
-				case "flash": 
-					$flv=$output->path; 
-					$width=$output->width; 
-					$height=$output->height;
-					break;
-
-				case "custom": 
-					$path = $output->path;
-					$ext = pathinfo($path, PATHINFO_EXTENSION);
-					switch($ext){
-						case "mp4": $HDmp4 = $path; break;
-						case "ogg": $HDogg = $path; break;
-						case "flv": $HDflv = $path; break;
-					}
-			}
+			$source = generate_source_tag( $path, $resolution );
+			$embedCode .= $source; 
 		}		
+		$embedCode .= '</video>';
 		//old code
 		//$embedCode = $videoClient->VideoPlayers()->GetWithFallback($brafton_id, 'redbean', 1, 'rcflashplayer', 1);
 		
-		$player = get_option("brafton_video_embed");
-		$embedCode =  "";
-
 		if ($player == "atlantis"){
-		//atlantis
-			$embedCode=<<<EOT
-                <video id='video-$brafton_id' class="ajs-default-skin atlantis-js" controls preload="auto" width="$width" height='$height'
-                        poster='$presplash'>
-                        <source src="$mp4" type='video/mp4' data-resolution="288" />
-                        <source src="$ogg" type='video/ogg' data-resolution="288" />
-                        <source src="$flv" type='video/flash' data-resolution="288" />
-                        <source src="$HDmp4" type='video/mp4' data-resolution="720p" />
-                        <source src="$HDogg" type='video/ogg' data-resolution="720p" />
-                        <source src="$HDflv" type='video/flash' data-resolution="720p" />
-                </video>
-                <script type="text/javascript">
-                        var atlantisVideo = AtlantisJS.Init({
-                                videos: [{
-                                        id: "video-$brafton_id"
-                                }]
-                        });
-                </script>
-EOT;
-		}
-		else{
-		//default to videojs, even if none is selected for scripts.
-		$embedCode=<<<EOT
-		<video id='video-$brafton_id' class='video-js vjs-default-skin'
-			controls preload='auto' width="$width" height='$height'
-			poster='$presplash'
-			data-setup='{"example_option":true}'>
-			<source src="$mp4" type='video/mp4' />
-			<source src="$ogg" type='video/ogg' />
-			<source src="$flv" type='video/flash' />
-		</video>
-EOT;
+			$script = '<script type="text/javascript">';
+            $script .=  'var atlantisVideo = AtlantisJS.Init({';
+            $script .=  'videos: [{';
+            $script .='id: "video-' . $brafton_id . '"';
+            $script .= '}]';
+            $script .= '});';
+            $script .=  '</script>';
+			$embedCode .= $script; 
 		}
 		
 		//if (strpos($embedCode->embedCode, "adobe") < 30)
@@ -1710,4 +1664,15 @@ function image_download($upload_array, $original_image_url, $date, $ch)
 		$local_image_url
 	);
 }
+
+
+/* video updates*/
+function generate_source_tag($src, $resolution)
+{
+    $tag = ''; 
+    $ext = pathinfo($src, PATHINFO_EXTENSION); 
+
+    return sprintf('<source src="%s" type="video/%s" data-resolution="%s" />', $src, $ext, $resolution );
+}
+
 ?>
