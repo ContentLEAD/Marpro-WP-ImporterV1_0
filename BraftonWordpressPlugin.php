@@ -423,7 +423,6 @@ function braftonxml_sched_options_page()
 	add_option("braftonxml_videoPublic", "xxxxx");
 	add_option("braftonxml_videoSecret", "xxxxx");
 	add_option("braftonxml_videoFeedNum", "0");
-	add_option("braftonxml_videoFeedNum", "0");
 	add_option("brafton_atlantis_jquery", "on");
 	add_option("brafton_atlantis_extra_css", "off");
 	add_option("brafton_video_embed","videojs");
