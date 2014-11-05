@@ -985,11 +985,7 @@ function braftonxml_sched_load_videos()
 			//logMsg($output->path);
 			$type = $output->type;
 			$path = $output->path; 
-			$height = $output->path; 
-
 			$resolution = $output->height; 
-			$width = $resolution; 
-
 			$source = generate_source_tag( $path, $resolution );
 			$embedCode .= $source; 
 		}		
