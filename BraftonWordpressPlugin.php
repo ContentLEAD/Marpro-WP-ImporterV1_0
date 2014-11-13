@@ -423,7 +423,6 @@ function braftonxml_sched_options_page()
 	add_option("braftonxml_videoPublic", "xxxxx");
 	add_option("braftonxml_videoSecret", "xxxxx");
 	add_option("braftonxml_videoFeedNum", "0");
-	add_option("braftonxml_videoFeedNum", "0");
 	add_option("brafton_atlantis_jquery", "on");
 	add_option("brafton_atlantis_extra_css", "off");
 	add_option("brafton_video_embed","videojs");
@@ -984,34 +983,6 @@ function braftonxml_sched_load_videos()
 			$output=$videoOutClient->Get($listItem->id);
 			//logMsg($output->path);
 			$type = $output->type;
-			switch($type){
-				case "htmlmp4": 
-					$mp4=$output->path; 
-					$width=$output->width; 
-					$height=$output->height;
-					break;
-
-				case "htmlogg": 
-					$ogg=$output->path; 
-					$width=$output->width; 
-					$height=$output->height;
-					break;
-
-				case "flash": 
-					$flv=$output->path; 
-					$width=$output->width; 
-					$height=$output->height;
-					break;
-
-				case "custom": 
-					$path = $output->path;
-					$ext = pathinfo($path, PATHINFO_EXTENSION);
-					switch($ext){
-						case "mp4": $HDmp4 = $path; break;
-						case "ogg": $HDogg = $path; break;
-						case "flv": $HDflv = $path; break;
-					}
-			}
 		}		
 		//old code
 		//$embedCode = $videoClient->VideoPlayers()->GetWithFallback($brafton_id, 'redbean', 1, 'rcflashplayer', 1);
