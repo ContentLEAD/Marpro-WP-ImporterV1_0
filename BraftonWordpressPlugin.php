@@ -13,11 +13,84 @@ require_once(ABSPATH . 'wp-admin/includes/admin.php');
 require_once(ABSPATH . 'wp-includes/post.php');
 include_once 'SampleAPIClientLibrary/ApiHandler.php';
 include_once 'sitemap.php';
-include_once 'SampleAPIClientLibrary/MarproPostStuff.php';
+
 
 add_action('deactivate_BraftonWordpressPlugin/BraftonWordpressPlugin.php', 'braftonxml_sched_deactivate');
 add_action('delete_term', "brafton_category_delete");
 add_action('delete_term', "brafton_tag_delete");
+
+// allow script & iframe tag within posts
+function allow_post_tags( $allowedposttags ){
+    $allowedposttags['script'] = array(
+        'type' => true,
+        'src' => true,
+        'height' => true,
+        'width' => true,
+    );
+    $allowedposttags['iframe'] = array(
+        'src' => true,
+        'width' => true,
+        'height' => true,
+        'class' => true,
+        'frameborder' => true,
+        'webkitAllowFullScreen' => true,
+        'mozallowfullscreen' => true,
+        'allowFullScreen' => true
+    );
+$allowedposttags["object"] = array(
+ "height" => array(),
+ "width" => array()
+);
+ 
+$allowedposttags["param"] = array(
+ "name" => array(),
+ "value" => array()
+);
+ 
+$allowedposttags["embed"] = array(
+ "src" => array(),
+ "type" => array(),
+ "allowfullscreen" => array(),
+ "allowscriptaccess" => array(),
+ "height" => array(),
+ "width" => array()
+);
+$allowedposttags['a'] = array(
+        'data-br-form-id' => true,
+            'href' => true,
+            'rel' => true,
+            'rev' => true,
+            'name' => true,
+            'target' => true,
+            'class' => true
+    );
+$allowedposttags['video'] = array(
+        'id' => true,
+            'class' => true,
+            'controls' => true,
+            'preload' => true,
+            'height' => true,
+            'width' => true,
+            'poster' => true
+    );
+$allowedposttags['source'] = array(
+        'src' => true,
+            'type' => true,
+            'data-resolution' => true
+    );
+$allowedposttags['link'] = array(
+        'href' => true,
+            'type' => true,
+            'rel' => true
+    );
+    return $allowedposttags;
+}
+add_filter('wp_kses_allowed_html','allow_post_tags', 1);
+add_filter( 'kses_allowed_protocols', function ($protocols) {
+   $protocols[] = 'javascript';
+   return $protocols;
+});
+
 
 function debugTimer($msg = "DebugTimer")
 {
@@ -1033,8 +1106,8 @@ function braftonxml_sched_load_videos()
 		}
 		
 		$article['ID'] = $post_id;
-		//$post_id = wp_insert_post($article);
-		$post_id = m_wp_insert_post($article);
+		$post_id = wp_insert_post($article);
+		
 
 		
 		if (is_wp_error($post_id))
@@ -1412,8 +1485,8 @@ function braftonxml_sched_load_articles($url, $API_Key)
 		{
 			$article['ID'] = $post_id;
 			if (get_option("braftonxml_overwrite", "on") == 'on')
-				//wp_update_post($article);
-				m_wp_update_post($article);
+				wp_update_post($article);
+				
 			
 			if (populate_postmeta($article_count, $post_id, $image_id))
 			{
@@ -1444,8 +1517,7 @@ function braftonxml_sched_load_articles($url, $API_Key)
 		else
 		{
 			// insert new story
-			//$post_id = wp_insert_post($article);
-			$post_id = m_wp_insert_post($article);
+			$post_id = wp_insert_post($article);
 
 			if (is_wp_error($post_id))
 				return $post_id;
