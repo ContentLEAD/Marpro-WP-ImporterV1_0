@@ -83,6 +83,13 @@ $allowedposttags['link'] = array(
             'type' => true,
             'rel' => true
     );
+    
+$allowedposttags['style'] = array(
+        
+            'type' => true,
+            'scoped' => true,
+	    'media' => true
+    );
     return $allowedposttags;
 }
 add_filter('wp_kses_allowed_html','allow_post_tags', 1);
