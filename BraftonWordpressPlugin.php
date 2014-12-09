@@ -1094,15 +1094,41 @@ function braftonxml_sched_load_videos()
 		//old code
 		//$embedCode = $videoClient->VideoPlayers()->GetWithFallback($brafton_id, 'redbean', 1, 'rcflashplayer', 1);
 		
-		if ($player == "atlantis"){
+	if ($player == "atlantis"){
+
+			$CTAText="On Pause CTA title ";
+			$site="On Pause CTA URL ";
+			
+			$pauseCallToActionEvent ="text: \"<a href='$site'> ".$CTAText.'</a>"';
+
+
+
+			//end of video cta
+			$end_video_title = 'End of video title ';
+			$end_video_subtitle  = 'End of video sub-title';
+			$end_video_cta_link = 'End of video CTA Button Link ';
+			$button_cta_text = 'Sample Test'; 
+			$end_of_video_cta = 'endOfVideoOptions: {
+	            callToAction: {
+	                title: "' . $end_video_title . '",
+	                subtitle: "' . $end_video_subtitle . '",
+	                button: {
+	                    link: "' .$end_video_cta_link . '", text: "' . $button_cta_text .'" 
+	                }
+	            }
+	        }';
+
+			
 			$script = '<script type="text/javascript">';
             $script .=  'var atlantisVideo = AtlantisJS.Init({';
             $script .=  'videos: [{';
-            $script .='id: "video-' . $brafton_id . '"';
+            $script .='id: "video-' . $brafton_id .'"'.','. 'pauseCallToAction: {' .$pauseCallToActionEvent.'},';
+            $script .= $end_of_video_cta;
             $script .= '}]';
             $script .= '});';
             $script .=  '</script>';
-			$embedCode .= $script; 
+            $embedCode .= $script;
+
 		}
 		
 		//if (strpos($embedCode->embedCode, "adobe") < 30)
