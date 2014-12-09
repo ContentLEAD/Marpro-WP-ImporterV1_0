@@ -305,7 +305,7 @@ function braftonxml_sched_setoptions()
 	if (!empty($_POST['braftonxml_videoSecret']))
 		update_option("braftonxml_videoSecret", $_POST['braftonxml_videoSecret']);
 	
-	if (!empty($_POST['braftonxml_videoFeedNum']))
+	if (isset($_POST['braftonxml_videoFeedNum'])) 
 		update_option("braftonxml_videoFeedNum", $_POST['braftonxml_videoFeedNum']);
 
 	if (!empty($_POST['brafton_video_embed']))
