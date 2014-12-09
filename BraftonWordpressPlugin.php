@@ -1,6 +1,6 @@
 <?php
 /*
-	Plugin Name: Brafton API Article Loader
+	Plugin Name: Brafton API Article LoaderRR
 	Plugin URI: http://www.brafton.com/support/wordpress
 	Description: A Wordpress 2.9+ plugin designed to download articles from Brafton's API and store them locally, along with attached media.
 	Version: 1.3.4
@@ -994,8 +994,35 @@ function braftonxml_sched_load_videos()
 	$publicKey = get_option("braftonxml_videoPublic");
 	$secretKey = get_option("braftonxml_videoSecret");
 	
-	$baseURL = 'http://livevideo.api.brafton.com/v2/';
-	$photoURI = "http://pictures.brafton.com/v2/";
+	$domain = get_option( "braftonxml_domain");
+
+	switch ($domain) {
+		case 'api.brafton.com':
+			$baseURL = 'http://livevideo.api.brafton.com/v2/';
+			$photoURI = "http://pictures.brafton.com/v2/";
+			break;
+
+		case 'api.contentlead.com':
+			$baseURL = 'http://livevideo.api.contentlead.com/v2/';
+			$photoURI = "http://pictures.contentlead.com/v2/";
+			break;
+
+		 case 'api.castleford.com.au':
+		 	$baseURL = 'http://livevideo.api.castleford.com.au/v2/';
+			$photoURI = "http://pictures.castleford.com.au/v2/";
+			break;
+
+		default:
+			$baseURL = 'http://livevideo.api.brafton.com/v2/';
+			$photoURI = "http://pictures.brafton.com/v2/";
+			break;
+	}
+
+	echo '<h1>'.$baseURL.'</h1>';
+	echo '<h1>'.$photoURI.'</h1>';
+
+
+
 	$videoClient = new AdferoVideoClient($baseURL, $publicKey, $secretKey);
 	$client = new AdferoClient($baseURL, $publicKey, $secretKey);
 	$photoClient = new AdferoPhotoClient($photoURI);

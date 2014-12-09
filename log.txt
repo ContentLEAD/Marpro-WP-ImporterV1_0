@@ -1,0 +1,54 @@
+12/09/2014 03:43:10 PM - Start Run
+12/09/2014 03:43:25 PM - Start Run
+12/09/2014 03:43:34 PM - Start Run
+12/09/2014 03:44:11 PM - Start Run
+12/09/2014 03:45:14 PM - Start Run
+12/09/2014 03:45:22 PM - Start Run
+12/09/2014 03:45:31 PM - Start Run
+12/09/2014 03:47:38 PM - Start Run
+12/09/2014 03:48:42 PM - Start Run
+12/09/2014 03:49:25 PM - Start Run
+12/09/2014 03:49:28 PM - Imported 40018177->5116 : Continued Focus Leads to Trade Show Booth Success
+12/09/2014 03:49:29 PM - Imported 40016440->5118 : B2B Trade Show Booths Should Be Long on Information
+12/09/2014 03:49:30 PM - Imported 40015324->5120 : Trade Shows Have Room to Evolve
+12/09/2014 03:49:32 PM - Imported 40014317->5122 : Content Marketing Comes to Trade Shows
+12/09/2014 03:49:35 PM - Imported 40013907->5124 : Budget Management A Trade Show Priority
+12/09/2014 03:49:36 PM - Imported 40013482->5126 : Demonstrations Add Spark to Trade Show Booths
+12/09/2014 03:49:37 PM - Imported 40013040->5128 : Trade Show Performance Tied To Preparedness
+12/09/2014 03:49:38 PM - Imported 40012044->5130 : Trade Show Organizers Must Make Events Socially Visible
+12/09/2014 03:49:39 PM - Imported 40011163->5132 : Trade Show Exhibitors: Balance Functionality and Flair
+12/09/2014 03:49:40 PM - Imported 40010688->5134 : Trade Show Booth Staff Members Need A Strong Mission
+12/09/2014 03:50:10 PM - Start Run
+12/09/2014 03:52:40 PM - Start Run
+12/09/2014 03:52:42 PM - vid:40000101->5136 success
+12/09/2014 03:52:44 PM - vid:40000139->5138 success
+12/09/2014 03:52:47 PM - vid:40000141->5140 success
+12/09/2014 03:52:53 PM - Start Run
+12/09/2014 03:52:54 PM - vid:40000254->5142 success
+12/09/2014 03:52:56 PM - vid:40000256->5144 success
+12/09/2014 03:52:58 PM - vid:40002310->5146 success
+12/09/2014 03:53:01 PM - vid:40004125->5148 success
+12/09/2014 03:53:03 PM - vid:40007021->5150 success
+12/09/2014 03:55:18 PM - Start Run
+12/09/2014 03:55:24 PM - vid:40000667->5152 success
+12/09/2014 03:55:26 PM - vid:40001051->5154 success
+12/09/2014 03:55:28 PM - vid:40001184->5156 success
+12/09/2014 03:55:31 PM - vid:40001252->5158 success
+12/09/2014 03:55:33 PM - Imported 40005052->5160 : Is your home's plumbing system ready for Christmas?
+12/09/2014 03:55:34 PM - Imported 40004832->5162 : How can you make home maintenance an easier process?
+12/09/2014 03:55:35 PM - Imported 40004671->5164 : How can you find somebody reliable to work in your home?
+12/09/2014 03:55:37 PM - Imported 40004594->5166 : What you need to know in order to conserve water in your home
+12/09/2014 03:55:37 PM - Imported 40004257->5168 : Tips to help you affordably heat your home this winter
+12/09/2014 03:55:39 PM - Imported 40003989->5170 : Do your home's windows need to be replaced?
+12/09/2014 03:55:40 PM - Imported 40004140->5172 : Winterizing your home in two easy steps
+12/09/2014 03:55:41 PM - Imported 40003956->5174 : Keep your home warm and safe this winter
+12/09/2014 03:55:42 PM - Imported 40003984->5176 : How you can prevent a home disaster from happening this winter
+12/09/2014 03:55:44 PM - Imported 40003955->5178 : How to heat your home efficiently this winter
+12/09/2014 03:55:45 PM - Imported 40003910->5180 : Is your home ready for the winter?
+12/09/2014 03:55:46 PM - Imported 40003691->5182 : Protect your home from the deep winter freeze
+12/09/2014 03:55:47 PM - Imported 40003637->5184 : How to keep your home safe during the winter
+12/09/2014 03:55:49 PM - Imported 40003461->5186 : DIY plumbing projects you can complete on your own
+12/09/2014 03:55:50 PM - Imported 40003369->5188 : How to fix a toilet that won't flush
+12/09/2014 03:55:51 PM - Imported 40003239->5190 : The do's and don'ts of remodeling your bathroom
+12/09/2014 03:55:53 PM - Imported 40003112->5192 : Is your washing machine leaking?
+12/09/2014 03:55:54 PM - Imported 40002951->5194 : Why is the sink faucet leaking?
