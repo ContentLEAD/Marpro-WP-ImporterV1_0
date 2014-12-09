@@ -1,6 +1,6 @@
 <?php
 /*
-	Plugin Name: Brafton API Article LoaderRR
+	Plugin Name: Brafton API Article Loader
 	Plugin URI: http://www.brafton.com/support/wordpress
 	Description: A Wordpress 2.9+ plugin designed to download articles from Brafton's API and store them locally, along with attached media.
 	Version: 1.3.4
@@ -1017,11 +1017,6 @@ function braftonxml_sched_load_videos()
 			$photoURI = "http://pictures.brafton.com/v2/";
 			break;
 	}
-
-	echo '<h1>'.$baseURL.'</h1>';
-	echo '<h1>'.$photoURI.'</h1>';
-
-
 
 	$videoClient = new AdferoVideoClient($baseURL, $publicKey, $secretKey);
 	$client = new AdferoClient($baseURL, $publicKey, $secretKey);
