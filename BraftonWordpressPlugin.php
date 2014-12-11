@@ -1075,10 +1075,10 @@ function braftonxml_sched_load_videos()
 		$list=$videoList->items;
 		$player = get_option("brafton_video_embed");
 		if ($player == "atlantis")
-			$embedCode = sprintf( "<video id='video-%s' class=\"ajs-default-skin atlantis-js\" controls preload=\"auto\" width='512' height='288'; poster='%s' >", $brafton_id, $presplash ); 
+			$embedCode = sprintf( "<video id='video-%s' class=\"ajs-default-skin atlantis-js\" controls preload=\"auto\" width='512' height='288' poster='%s' >", $brafton_id, $presplash ); 
 		
 		else
-			$embedCode = sprintf( "<video id='video-%s' class='video-js vjs-default-skin' controls preload='auto' width='512' height='288'; poster='%s' data-setup src='%s' >", $brafton_id, $presplash, $path ); 
+			$embedCode = sprintf( "<video id='video-%s' class='video-js vjs-default-skin' controls preload='auto' width='512' height='288' poster='%s' data-setup src='%s' >", $brafton_id, $presplash, $path ); 
 
 		foreach($list as $listItem){
 			$output=$videoOutClient->Get($listItem->id);
