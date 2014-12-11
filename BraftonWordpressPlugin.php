@@ -14,7 +14,6 @@ require_once(ABSPATH . 'wp-includes/post.php');
 include_once 'SampleAPIClientLibrary/ApiHandler.php';
 include_once 'sitemap.php';
 
-
 add_action('deactivate_BraftonWordpressPlugin/BraftonWordpressPlugin.php', 'braftonxml_sched_deactivate');
 add_action('delete_term', "brafton_category_delete");
 add_action('delete_term', "brafton_tag_delete");
