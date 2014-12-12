@@ -1047,7 +1047,7 @@ function braftonxml_sched_load_videos()
 	// Article Import Loop
 	foreach ($articleList->items as $article)
 	{
-		if ($counter >= 4)
+		if ($counter >= 30)
 			break; //load 30 articles 
 		
 		//Extend PHP timeout limit by X seconds per article
