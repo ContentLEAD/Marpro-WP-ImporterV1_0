@@ -637,7 +637,7 @@ function braftonxml_sched_options_page()
 				$timestamp += 60;
 				if ($timestamp < time())
 				{
-					echo '<p style="color:red;">It appears there is an error with the cron scheduler.  This is likely due to another of the <b>' . $countCron . '</b> plugins utilizing the Wordpress Cron Scheduler</p>';
+					echo '<p style="color:red;">Warning: Importer\'s last import run did not complete.  Please contact your Content Marketing Specialist for support.</p>';
 					//echo $timestamp."<".time();
 				}
 			}
@@ -667,7 +667,8 @@ function braftonxml_sched_options_page()
 	<?php }
 ?>
 
-<?php
+<!-- Remove references to the logging functionality -->
+<!--<?php
 	if (!isset($_GET['showLog']) || $_GET['showLog'] == 0)
 	{
 		$logURL = braftonCurPageURL() . '&showLog=1';
@@ -703,7 +704,7 @@ function braftonxml_sched_options_page()
 		if (rename($filename, $newName) == false)
 			echo "<span style='color:red;'>Error clearing log file, likely permissions error.</span><br><br>";
 	}
-?>
+?>-->
 <?php
 		$domain = get_option("braftonxml_domain");
 ?>
@@ -1205,14 +1206,14 @@ function braftonxml_sched_load_videos()
 			}
 		}
 		
-		logMsg("vid:" . $brafton_id . "->" . $post_id . " success");
+		//logMsg("vid:" . $brafton_id . "->" . $post_id . " success");
 	}
 	addURLs($sitemap);
 }
 
 function braftonxml_sched_load_articles($url, $API_Key)
 {
-	logMsg("Start Run");
+	//logMsg("Start Run");
 	
 	if (get_option("braftonxml_video") == 'on')
 	{
@@ -1596,7 +1597,7 @@ function braftonxml_sched_load_articles($url, $API_Key)
 			}
 		}
 		
-		logMsg($articleStatus . " " . $brafton_id . "->" . $post_id . " : " . $post_title);
+		//logMsg($articleStatus . " " . $brafton_id . "->" . $post_id . " : " . $post_title);
 	}
 }
 
