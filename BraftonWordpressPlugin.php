@@ -91,11 +91,14 @@ $allowedposttags['style'] = array(
     );
     return $allowedposttags;
 }
-add_filter('wp_kses_allowed_html','allow_post_tags', 1);
-add_filter( 'kses_allowed_protocols', function ($protocols) {
+
+function js_protocols($protocols) {
    $protocols[] = 'javascript';
    return $protocols;
-});
+}
+
+add_filter('wp_kses_allowed_html','allow_post_tags', 1);
+add_filter( 'kses_allowed_protocols', 'js_protocols' );
 
 
 function debugTimer($msg = "DebugTimer")
