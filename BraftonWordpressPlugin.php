@@ -318,7 +318,9 @@ function braftonxml_sched_setoptions()
 		
 	if (!empty($_POST['brafton_atlantis_extra_css']))
 		update_option("brafton_atlantis_extra_css", $_POST['brafton_atlantis_extra_css']);
-		
+    
+    if (!empty($_POST['braftonxml_dynamic_author']))
+		update_option("braftonxml_dynamic_author", $_POST['braftonxml_dynamic_author']);
 	$feedSettings = array(
 		"url" => get_option("braftonxml_sched_url"),
 		"API_Key" => get_option("braftonxml_sched_API_KEY")
@@ -500,6 +502,7 @@ function braftonxml_sched_options_page()
 	add_option("braftonxml_sched_tags", "none_tags");
 	add_option("braftonxml_overwrite", "off");
 	add_option("braftonxml_publishdate", "published");
+    add_option("braftonxml_dynamic_author", "n");
 	
 	add_option("braftonxml_video", "off");
 	add_option("braftonxml_videoPublic", "xxxxx");
@@ -738,9 +741,25 @@ function braftonxml_sched_options_page()
 								Example: 2de93ffd-280f-4d4b-9ace-be55db9ad4b7<br/>
 								<br/>Importer will run every hour<br />
 								
-
-								<br />                
-								<b><u>Post Author</u></b><br />                                       
+                                <br/>
+                                <b><u>Dynamic Author</u></b><br/>
+                                <span><font size="-2"><i>Sets Author to "byLine" From the feed.  If the Author does not exsist they will be added.<br/> Default auhor is returned if no author is set int he field or if new author cannot be created.</i></font></span><br/>
+                                <input type="radio" name="braftonxml_dynamic_author" value="y" <?php
+		if (get_option("braftonxml_dynamic_author") == 'y')
+		{
+			print 'checked';
+		}
+?> />Use Dynamic Authors<br />                
+									<input type="radio" name="braftonxml_dynamic_author" value="n" <?php
+		if (get_option("braftonxml_dynamic_author") == 'n')
+		{
+			print 'checked';
+		}
+?> />Do Not Use Dynamic Authors<br />
+            
+								<br />
+                                <div id="brafton_show_author" style="display:block">
+								<b><u>Default Post Author</u></b><br />                                       
 <?php
 		wp_dropdown_users(array(
 			'name' => 'braftonxml_default_author',
@@ -763,6 +782,7 @@ function braftonxml_sched_options_page()
 			print 'checked';
 		}
 ?> /> None<br />
+            </div>
 									<table>
 										<tr><td>Enter custom <b>categories</b>: <input type="text" name="braftonxml_sched_cats_input" value="<?php
 		echo get_option("braftonxml_sched_cats_input", "");
@@ -1213,7 +1233,23 @@ function braftonxml_sched_load_videos()
 	}
 	addURLs($sitemap);
 }
-
+function checkAuthor($author, $byLine){
+    if($author != 'n' ){
+        $author = get_option("braftonxml_default_author");
+    }
+    else{
+        if(empty($byLine)){$author = get_option("braftonxml_default_author");return $author; }
+        if(!(username_exists($byLine))){
+            $pass = wp_generate_password(12,false);
+            $author = wp_create_user($byLine, $pass, $byLine.rand().'@example.com');
+        }
+        else{
+            $user = get_user_by('login',$byLine);
+            $author = $user->ID;
+        }
+    }
+    return $author;
+}
 function braftonxml_sched_load_articles($url, $API_Key)
 {
 	//logMsg("Start Run");
@@ -1350,7 +1386,8 @@ function braftonxml_sched_load_articles($url, $API_Key)
 		$post_id = brafton_post_exists($brafton_id);
 		$post_date;
 		$post_date_gmt;
-		$post_author = get_option("braftonxml_default_author", 1);
+		$post_author = checkAuthor(get_option("braftonxml_dynamic_author"), $a->getByLine());
+        //$post_author = get_option("braftonxml_default_author", 1);
 		if ($post_id)
 			$post_status = get_post_status($post_id);
 		else
