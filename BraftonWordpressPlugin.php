@@ -3,7 +3,7 @@
 	Plugin Name: Brafton API Article Loader
 	Plugin URI: http://www.brafton.com/support/wordpress
 	Description: A Wordpress 2.9+ plugin designed to download articles from Brafton's API and store them locally, along with attached media.
-	Version: 1.3.4
+	Version: 1.3.5
 	Author: Brafton, Inc.
 	Author URI: http://brafton.com/support/wordpress
 */
@@ -321,6 +321,26 @@ function braftonxml_sched_setoptions()
     
     if (!empty($_POST['braftonxml_dynamic_author']))
 		update_option("braftonxml_dynamic_author", $_POST['braftonxml_dynamic_author']);
+
+	//Video CTA options
+	if (!empty($_POST['brafton_pause_txt']))
+		update_option("brafton_pause_txt", $_POST['brafton_pause_txt']);
+
+	if (!empty($_POST['brafton_pause_link']))
+		update_option("brafton_pause_link", $_POST['brafton_pause_link']);
+
+	if (!empty($_POST['brafton_endcta_title']))
+		update_option("brafton_endcta_title", $_POST['brafton_endcta_title']);
+
+	if (!empty($_POST['brafton_endcta_subtitle']))
+		update_option("brafton_endcta_subtitle", $_POST['brafton_endcta_subtitle']);
+
+	if (!empty($_POST['brafton_endcta_btnlink']))
+		update_option("brafton_endcta_btnlink", $_POST['brafton_endcta_btnlink']);
+
+	if (!empty($_POST['brafton_endcta_btntxt']))
+		update_option("brafton_endcta_btntxt", $_POST['brafton_endcta_btntxt']);
+
 	$feedSettings = array(
 		"url" => get_option("braftonxml_sched_url"),
 		"API_Key" => get_option("braftonxml_sched_API_KEY")
@@ -511,6 +531,12 @@ function braftonxml_sched_options_page()
 	add_option("brafton_atlantis_jquery", "on");
 	add_option("brafton_atlantis_extra_css", "off");
 	add_option("brafton_video_embed","videojs");
+	add_option("brafton_pause_link","");
+	add_option("brafton_pause_txt","");
+	add_option("brafton_endcta_title","");
+	add_option("brafton_endcta_subtitle","");
+	add_option("brafton_endcta_btnlink","");
+	add_option("brafton_endcta_btntxt","");
 ?>
 
 			<script type="text/javascript">
@@ -993,6 +1019,30 @@ function braftonxml_sched_options_page()
 					}
 			?>/> Off<br />
 
+				<b><u>Pause CTA Text</u></b><br />
+				<font size="-2"><i>Text to display when video is paused.</i></font><br />
+				<input type="text" name="brafton_pause_txt" value="<?php echo get_option("brafton_pause_txt", ""); ?>" /><br />
+
+				<b><u>Pause CTA Link</u></b><br />
+				<font size="-2"><i>URL pause CTA points to (include http://).</i></font><br />
+				<input type="text" name="brafton_pause_link" value="<?php echo get_option("brafton_pause_link", ""); ?>" /><br />
+
+				<b><u>End CTA Title</u></b><br />
+				<font size="-2"><i>Title text to display at end of video.</i></font><br />
+				<input type="text" name="brafton_endcta_title" value="<?php echo get_option("brafton_endcta_title", ""); ?>" /><br />
+
+				<b><u>End CTA Sub-Title</u></b><br />
+				<font size="-2"><i>Subtitle text to display at end of video.</i></font><br />
+				<input type="text" name="brafton_endcta_subtitle" value="<?php echo get_option("brafton_endcta_subtitle", ""); ?>" /><br />
+
+				<b><u>End CTA Button Link</u></b><br />
+				<font size="-2"><i>What end-video CTA button links to.</i></font><br />
+				<input type="text" name="brafton_endcta_btnlink" value="<?php echo get_option("brafton_endcta_btnlink", ""); ?>" /><br />
+
+				<b><u>End CTA Button Text</u></b><br />
+				<font size="-2"><i>Text of end-video CTA button.</i></font><br />
+				<input type="text" name="brafton_endcta_btntxt" value="<?php echo get_option("brafton_endcta_btntxt", ""); ?>" /><br />
+
 				</div><!--/video-settings-->
 				<br /> 
 
@@ -1122,6 +1172,40 @@ function braftonxml_sched_load_videos()
             $script .=  'var atlantisVideo = AtlantisJS.Init({';
             $script .=  'videos: [{';
             $script .='id: "video-' . $brafton_id . '"';
+
+            //video CTA section
+
+            //pull five potential CTA related variables
+			$pause_txt = get_option("brafton_pause_txt","");
+			$pause_link = get_option("brafton_pause_link","");
+			$end_title = get_option("brafton_endcta_title","");
+			$end_sub = get_option("brafton_endcta_subtitle","");
+			$end_link = get_option("brafton_endcta_btnlink","");
+			$end_txt = get_option("brafton_endcta_btntxt","");
+
+			//check if Pause CTA details are set, add to embed code if so
+            if ( ($pause_txt != "") && ($pause_link != "") ) {
+            	$script .= ',';
+            	$script .= 'pauseCallToAction: {';
+            	$script .= 'text: "<a href=\'' . $pause_link . '\'>' . $pause_txt . '</a>"';
+            	$script .= '}';
+            }
+
+            //check if End of video CTA fields are filled out, append if so
+            if ( ( $end_title && $end_sub && $end_link && $end_txt ) != "" ) {
+            	$script .= ',';
+            	$script .= 'endOfVideoOptions: {';
+            	$script .= 'callToAction: {';
+            	$script .= 'title: "' . $end_title . '",';
+            	$script .= 'subtitle: "' . $end_sub . '",';
+            	$script .= 'button: {';
+            	$script .= 'link: "' . $end_link . '",';
+            	$script .= 'text: "' . $end_txt . '"';
+            	$script .= '}';
+            	$script .= '}';
+            	$script .= '}';
+            }
+
             $script .= '}]';
             $script .= '});';
             $script .=  '</script>';
