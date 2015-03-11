@@ -1229,6 +1229,12 @@ function braftonxml_sched_load_videos()
 		$post_status = get_option("braftonxml_sched_status", "publish");
 		
 		$post_date = $thisArticle->fields['date'];
+
+		$post_date_gmt;
+
+		// Do some formatting
+		$post_date_gmt = strtotime($post_date);
+		$post_date_gmt = gmdate('Y-m-d H:i:s', $post_date_gmt);
 		
 		$article = compact('post_author', 'post_date', 'post_date_gmt', 'post_content', 'post_title', 'post_status', 'post_excerpt');
 		
