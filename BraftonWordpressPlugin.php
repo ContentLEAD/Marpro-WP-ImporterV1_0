@@ -89,6 +89,15 @@ $allowedposttags['style'] = array(
             'scoped' => true,
 	    'media' => true
     );
+
+$allowedposttags['input'] = array(
+    
+    'id' => true,
+    'type' => true,
+    'name' => true,
+    'value' => true
+    );
+
     return $allowedposttags;
 }
 
