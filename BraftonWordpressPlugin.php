@@ -1334,7 +1334,7 @@ function braftonxml_sched_load_videos()
 	addURLs($sitemap);
 }
 function checkAuthor($author, $byLine){
-    if($author != 'n' ){
+    if($author == 'n' ){
         $author = get_option("braftonxml_default_author");
     }
     else{
