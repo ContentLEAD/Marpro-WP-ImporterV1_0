@@ -403,9 +403,10 @@ function brafton_videojs_scripts(){
 		echo '<link href="//vjs.zencdn.net/4.3/video-js.css" rel="stylesheet"><script src="//vjs.zencdn.net/4.3/video.js"></script>';
 
 	}else if($embed=="atlantis"){
-		echo '<link rel="stylesheet" href="http://p.ninjacdn.co.uk/atlantisjs/v0.11.7/atlantisjs.css" type="text/css" /><script src="http://p.ninjacdn.co.uk/atlantisjs/v0.11.7/atlantis.js" type="text/javascript"></script>';
+        if(get_option("brafton_atlantis_jquery")=="on") echo '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>';
+        
+		echo '<link rel="stylesheet" href="//atlantisjs.brafton.com/v1/atlantisjsv1.3.css" type="text/css" /><script src="//atlantisjs.brafton.com/v1/atlantis.min.v1.3.js" type="text/javascript"></script>';
 		
-		if(get_option("brafton_atlantis_jquery")=="on") echo '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>';
 		
 		if(get_option("brafton_atlantis_extra_css")=="on") {
 		$css=<<<EOT
